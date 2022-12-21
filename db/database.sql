@@ -73,6 +73,10 @@ create table profesores_historico_clases(
 
 -- TODO PROCEDIMIENTOS --
 
+-- INSERTS -- 
+INSERT INTO estudiantes (nombre, apellidos,email,contrasenya,edad,info,foto) VALUES (
+"Natalia", "Nowakowska Benitez", "natalcia9405@gmail.com", "soyNatalia","1994-11-20","Vivo en alicante
+, pero soy polaca",null)
 -- CREAR UN ESTUDIANTE --
 DELIMITER $$
 $$
