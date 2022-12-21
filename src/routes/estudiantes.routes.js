@@ -2,8 +2,8 @@ import {Router} from 'express'
 import {getEstudiantes,createEstudiante,updateEstudiante,deleteEstudiante,getEstudianteByID} from'../controllers/estudiantes.controller.js'
 
 const router = Router();
-try {
-    //OBTENIENDO DATOS
+
+//OBTENIENDO DATOS
 router.get('/estudiantes',getEstudiantes)
 //buscando estudiante con id (pasamos un parametro)
 router.get('/estudiantes/:id',getEstudianteByID)
@@ -21,11 +21,6 @@ router.put('/estudiantes/:id',updateEstudiante)
 //BORRAMOS LOS DATOS
 //pasamos un parametro
 router.delete('/estudiantes/:id',deleteEstudiante)
-} catch (error) {
-    return res.status(500).json({
-        message: 'Algo ha ido mal'
-    })
-}
 
 
 export default router;
