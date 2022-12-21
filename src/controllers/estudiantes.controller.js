@@ -1,8 +1,15 @@
 import {poll} from '../db.js'
 
 export const getEstudiantes = async (req,res) => {
-    const [rows] = await poll.query('SELECT * FROM estudiantes')
+    try {
+        const [rows] = await poll.query('SELECT * FROM estudiantes')
     res.json(rows)
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Algo ha ido mal'
+        })
+    }
+    
 }
 
 export const getEstudianteByID = async (req,res) => {
