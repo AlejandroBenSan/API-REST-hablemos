@@ -17,7 +17,7 @@ export const getEstudianteByID = async (req,res) => {
         res.json(rows)
     }catch (error){
         return res.status(500).json({
-            message: "Algo ha ido mal"
+            message: 'Algo ha ido mal'
         })
     }
     
@@ -35,7 +35,7 @@ export const createEstudiante = async (req,res) => {
         res.send(rows)
     }catch (Error){
         return res.status(500).json({
-            message: "Algo ha ido mal"
+            message: 'Algo ha ido mal'
         })
     }
     
@@ -58,7 +58,7 @@ export const updateEstudiante = async (req,res) => {
         }
     }catch(error){
         return res.status(500).json({
-            message: "Algo ha ido mal"
+            message: 'Algo ha ido mal'
         })
     }
     
@@ -79,7 +79,7 @@ export const deleteEstudiante =  async (req,res) => {
         }
     }catch(error){
         return res.status(500).json({
-            message: "Algo ha ido mal"
+            message: 'Algo ha ido mal'
         })
     }
     

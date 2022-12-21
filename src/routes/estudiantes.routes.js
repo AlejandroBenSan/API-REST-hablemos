@@ -23,7 +23,7 @@ router.put('/estudiantes/:id',updateEstudiante)
 router.delete('/estudiantes/:id',deleteEstudiante)
 } catch (error) {
     return res.status(500).json({
-        message: "Algo ha ido mal"
+        message: 'Algo ha ido mal'
     })
 }
 
