@@ -35,7 +35,7 @@ export const createEstudiante = async (req,res) => {
         const {nombre,apellidos,email,contrasenya,edad,info,foto} = req.body
         if(foto === null){
             const [rows] = await poll.query('INSERT INTO estudiantes (nombre,apellidos,email,contrasenya,edad,info,foto) Values (?,?,?,?,?,?,?)',
-            [nombre,apellidos,email,contrasenya,edad,info,fotoBytes])
+            [nombre,apellidos,email,contrasenya,edad,info,foto])
         }else{
             const fotoBytes = Buffer.from(foto,'base64')
             //PARA HACER PETICIONES A LA BASE DE DATOS SIEMPRE HABRA QUE PONER EL ASYNC / AWAIT
