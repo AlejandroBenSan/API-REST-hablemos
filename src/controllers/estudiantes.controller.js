@@ -33,13 +33,15 @@ export const getEstudianteByID = async (req,res) => {
 export const createEstudiante = async (req,res) => {
     try{
         const {nombre,apellidos,email,contrasenya,edad,info,foto} = req.body
-
-        const fotoBytes = Buffer.from(foto,'base64')
-
-        //PARA HACER PETICIONES A LA BASE DE DATOS SIEMPRE HABRA QUE PONER EL ASYNC / AWAIT
-        const [rows] = await poll.query('INSERT INTO estudiantes (nombre,apellidos,email,contrasenya,edad,info,foto) Values (?,?,?,?,?,?,?)',
-        [nombre,apellidos,email,contrasenya,edad,info,fotoBytes])
-        
+        if(foto === null){
+            const [rows] = await poll.query('INSERT INTO estudiantes (nombre,apellidos,email,contrasenya,edad,info,foto) Values (?,?,?,?,?,?,?)',
+            [nombre,apellidos,email,contrasenya,edad,info,fotoBytes])
+        }else{
+            const fotoBytes = Buffer.from(foto,'base64')
+            //PARA HACER PETICIONES A LA BASE DE DATOS SIEMPRE HABRA QUE PONER EL ASYNC / AWAIT
+            const [rows] = await poll.query('INSERT INTO estudiantes (nombre,apellidos,email,contrasenya,edad,info,foto) Values (?,?,?,?,?,?,?)',
+            [nombre,apellidos,email,contrasenya,edad,info,fotoBytes])
+        }
         
         res.send(rows)
     }catch (Error){
