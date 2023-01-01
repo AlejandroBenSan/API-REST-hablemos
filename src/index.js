@@ -2,11 +2,15 @@ import express from 'express'
 import estudiantesRoutes from './routes/estudiantes.routes.js'
 import indexRoutes from './routes/index.routes.js'
 import {PORT} from './config.js'
+import bodyParser from 'body-parser'
 
 const app = express()
 
 //ESTE METODO SIRVE PARA PODER INTERPRETAR ARCHIVOS JSON ANTES DE QUE LLEGUE A LAS RUTAS
-app.use(express.json())
+//EL BODY PARSES SIRVE EN ESTE CASO PARA QUE EL JSON TENGA MAS CAPACIDAD
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(express.json());
 
 app.use(indexRoutes);
 app.use('/api',estudiantesRoutes);

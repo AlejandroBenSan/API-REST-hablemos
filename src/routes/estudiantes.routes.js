@@ -1,12 +1,20 @@
 import {Router} from 'express'
-import {getEstudiantes,createEstudiante,updateEstudiante,deleteEstudiante,getEstudianteByID} from'../controllers/estudiantes.controller.js'
+import {getEstudiantes,createEstudiante,updateEstudiante,deleteEstudiante,getEstudianteByID,getEstudianteByEmailPassword} from'../controllers/estudiantes.controller.js'
+import {getEstudianteEmail} from'../controllers/estudiantes.controller.js'
 
 const router = Router();
 
 //OBTENIENDO DATOS
 router.get('/estudiantes',getEstudiantes)
+
 //buscando estudiante con id (pasamos un parametro)
 router.get('/estudiantes/:id',getEstudianteByID)
+
+//BUSCANDO ESTUDIANTE POR EMAIL Y CONTRASEÑA (LOGIN)
+router.get('/estudiantes/login/:email/:contrasenya',getEstudianteByEmailPassword)
+
+//OBTENIENDO LA INFORMACIÓN DEL ESTUDIANTE CON EL EMAIL DESPUES DE LOGIN O LA CREACIÓN DE CUENTA
+router.get('/estudiantes/access/:email',getEstudianteEmail)
 
 //CREANDO DATOS
 router.post('/estudiantes',createEstudiante)
