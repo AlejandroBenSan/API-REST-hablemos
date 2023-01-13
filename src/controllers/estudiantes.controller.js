@@ -18,8 +18,17 @@ export const getEstudianteEmail = async (req,res) => {
     try{
         const email = req.params.email
 
-        const [rows] = await poll.query('SELECT * FROM estudiantes WHERE email = ?',[email])
-        console.log(rows[0])
+        const [rows] = await poll.query('SELECT id,nombre,apellidos,email,contrasenya,edad,info,HEX(foto) AS foto FROM estudiantes WHERE email = ?',[email])
+
+        //MODIFICAMOS LA SALIDA DE LA EDAD PARA QUE SALGA CON ESTE FORMATO dd/MM/yyyy
+        const date = new Date(rows[0].edad)
+        const outputDate = date.toLocaleDateString('es-Es',{
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        })
+        rows[0].edad = outputDate
+
         res.json(rows[0])
 
     }catch(error){
@@ -97,7 +106,6 @@ export const createEstudiante = async (req,res) => {
         }
         )
     }
-    
 }
 //ACTUALIZAR UN ESTUDIANTE
 export const updateEstudiante = async (req,res) => {
@@ -105,15 +113,16 @@ export const updateEstudiante = async (req,res) => {
         const id = req.params.id
         const {nombre,apellidos,email,contrasenya,edad,info,foto} = req.body
     
-        const [result] = await poll.query('UPDATE estudiantes SET nombre = ?, apellidos = ?, email = ?,'+ 
-            'contrasenya = ?, edad = ?, info = ?, foto = ? WHERE id = ?',[nombre,apellidos,email,contrasenya,edad,info,foto,id])
+        const [result] = await poll.query('UPDATE estudiantes SET nombre = IFNULL(?,nombre), apellidos = IFNULL(?,apellidos), email = IFNULL(?,email),'+ 
+            'contrasenya = IFNULL(?,contrasenya), edad = IFNULL(?,edad), info = IFNULL(?,info)'+
+            ', foto = IFNULL(UNHEX(?),foto) WHERE id = ?',[nombre,apellidos,email,contrasenya,edad,info,foto,id])
     
         if(result.affectedRows <= 0){
             return res.status(404).json({
                 message: 'Estudiante no encontrado. Error al actualizar'
             })
         }else{
-            return res.sendStatus(240)
+            return res.sendStatus(204)
         }
     }catch(error){
         return res.status(500).json({

@@ -1,5 +1,6 @@
 import express from 'express'
 import estudiantesRoutes from './routes/estudiantes.routes.js'
+import profesoresRoutes from './routes/profesores.routes.js'
 import indexRoutes from './routes/index.routes.js'
 import {PORT} from './config.js'
 import bodyParser from 'body-parser'
@@ -14,6 +15,7 @@ app.use(express.json());
 
 app.use(indexRoutes);
 app.use('/api',estudiantesRoutes);
+app.use('/api',profesoresRoutes);
 
 //Con esta funcion controlaremos los errores cuando no encuetre una ruta
 app.use((req,res,next) => {

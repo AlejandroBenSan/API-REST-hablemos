@@ -24,7 +24,7 @@ router.post('/estudiantes',createEstudiante)
 //pero si solo queremos cambiar algunos mediante json utilizaremos PATCH
 //en la función deberemos establecerla de la siguiente manera:
 //'UPDATE estudiantes SET nombre = IFNULL(?,nombre) si es nulo o undefinied dejara el valor que ya estaba
-router.put('/estudiantes/:id',updateEstudiante)
+router.patch('/estudiantes/update/:id',updateEstudiante)
 
 //BORRAMOS LOS DATOS
 //pasamos un parametro

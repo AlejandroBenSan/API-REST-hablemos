@@ -17,10 +17,11 @@ CREATE TABLE profesores(
     id int primary key auto_increment,
     nombre varchar(100) not null,
     apellidos varchar(150) not null,
-    email varchar(150) not null,
+    email varchar(150) not null unique,
     contrasenya varchar(14) not null,
     edad date null,
-    info varchar(300) null
+    info varchar(300) null,
+    foto mediumblob null
 );
 
 CREATE TABLE clases(
