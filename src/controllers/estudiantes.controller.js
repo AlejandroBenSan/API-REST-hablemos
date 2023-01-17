@@ -129,8 +129,8 @@ export const updateEstudiante = async (req,res) => {
             message: "Error"
         })
     }
-    
 } 
+
 //BORRAR UN ESTUDIANTE CON ID
 export const deleteEstudiante =  async (req,res) => {
     try{
